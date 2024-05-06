@@ -1,17 +1,23 @@
 import Image from "next/image";
 import { createClient } from '@/utils/supabase/server'
+import { redirect } from "next/navigation";
 
 export default async function Home() {
 
   const supabase = createClient();
 
- 
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if(!user) {
+    redirect('/login')
+  }
+  
+  console.log(user)
   const { data: images} = await supabase.from('images').select()
 
   const imageList = images ?? []
   return (
     <div>
-    <input type="file"></input>
     <div className="flex flex-wrap gap-4">
       {[...imageList, ...imageList, ...imageList ].map((image) =>{
         return (
@@ -20,6 +26,9 @@ export default async function Home() {
           </div>
         )
       })}
+    </div>
+    <div className="flex w-full  justify-center">
+      <a className="bg-blue-700 p-4 rounded-md">Upload ur own cat</a>
     </div>
     </div>
     // <Image
