@@ -21,12 +21,13 @@ async function TopNav() {
     <nav className="w-full flex items-center justify-between p-4 bg-pink-400 mb-4">
       <p>Cat.jpg</p>
       {profile ? 
-      <Image
-      width={50}
-      height={50}
-      src={profile[0].avatar_url}
-      alt="user profile picture"
-      /> 
+      <div className="bg-cover bg-center w-8 h-8 rounded-full" style={{backgroundImage: `url(${profile[0].avatar_url})`}}/>
+      // <Image
+      // width={50}
+      // height={50}
+      // src={profile[0].avatar_url}
+      // alt="user profile picture"
+      // /> 
       : 
       <p>Log In</p> }
     </nav>
