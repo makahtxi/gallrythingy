@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function Home() {
 
@@ -12,9 +13,10 @@ export default async function Home() {
     redirect('/login')
   }
   
-  console.log(user)
   const { data: images} = await supabase.from('images').select()
 
+
+  console.log(images)
   const imageList = images ?? []
   return (
     <div>
@@ -28,7 +30,9 @@ export default async function Home() {
       })}
     </div>
     <div className="flex w-full  justify-center">
-      <a className="bg-blue-700 p-4 rounded-md">Upload ur own cat</a>
+      <Link href="/upload">
+      <p className="bg-blue-700 p-4 rounded-md">Upload ur own cat</p>
+      </Link>
     </div>
     </div>
     // <Image
