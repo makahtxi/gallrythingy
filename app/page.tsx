@@ -17,11 +17,12 @@ export default async function Home() {
 
 
   console.log(images)
+
   const imageList = images ?? []
   return (
     <div>
     <div className="flex flex-wrap gap-4">
-      {[...imageList, ...imageList, ...imageList ].map((image) =>{
+      {imageList.map((image) =>{
         return (
           <div key={image.id} className="flex justify-center items-center w-48 h-48 bg-black">
             <img src={image.url} className="max-w-48 max-h-48"/>
