@@ -8,12 +8,12 @@ export default async function Home() {
   const supabase = createClient();
 
   const { data: { user } } = await supabase.auth.getUser()
-
+  console.log(user)
   if(!user) {
     redirect('/login')
   }
   
-  const { data: images} = await supabase.from('images').select()
+  const { data: images} = await supabase.from('profiles').select()
 
 
   console.log(images)
@@ -24,9 +24,13 @@ export default async function Home() {
     <div className="flex flex-wrap gap-4">
       {imageList.map((image) =>{
         return (
+          
           <div key={image.id} className="flex justify-center items-center w-48 h-48 bg-black">
-            <img src={image.url} className="max-w-48 max-h-48"/>
+            <Link href={`/photos/${image.id}`} passHref>
+            <img src={image.avatar_url} className="max-w-48 max-h-48"/>
+            </Link>
           </div>
+          
         )
       })}
     </div>

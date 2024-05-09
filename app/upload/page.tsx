@@ -10,6 +10,7 @@ export default function Page(){
 
     const supabase = createClient()
     const [avatar, setURL] = useState<string> ("")
+    const [user, setUser] = useState("")
 
     async function getUser(){
         const { data: { user } } = await supabase.auth.getUser()
@@ -21,6 +22,7 @@ export default function Page(){
         const avatarURL = userAvatar[0].avatar_url
         console.log(avatarURL)
         setURL(avatarURL)
+        setUser(user?.id)
         return
     }
 
@@ -71,10 +73,16 @@ export default function Page(){
     }
 
     return(
-        <div className="flex justify-center items-center w-full h-screen">
-            <div className="flex flex-col h-96 w-8/12 items-center justify-between bg-gray-900 p-4 border border-white rounded-md">
+        <div className="flex justify-around items-center w-full h-screen">
+            <div className="flex flex-col h-96 w-2/12 items-center justify-between bg-gray-900 p-4 border border-white rounded-md">
+            <h1> Accont Information</h1>
+            <p>{user}</p>
+            <label htmlFor="imgUpload" className="bg-blue-700 p-2 rounded-md hover:cursor-pointer hover:bg-blue-600">Chose your file</label>
+            <input id="imgUpload" name="img" className="w-0 h-0 opacity-0 overflow-hidden absolute -z-10" type="file" accept="image/*" onChange={uploadImage}/>
+            </div>
+            <div className="flex flex-col h-96 w-2/12 items-center justify-between bg-gray-900 p-4 border border-white rounded-md">
             <h1> Share your picture here</h1>
-            <div className="w-8/12 rounded-sm bg-gray-700 bg-cover h-4/6 border border-white" style={{backgroundImage: avatar ? `url(${avatar})`: 'none'}}>
+            <div className="w-60 aspect-square rounded-sm bg-gray-700 bg-cover  border border-white" style={{backgroundImage: avatar ? `url(${avatar})`: 'none'}}>
                 
             </div>
             <label htmlFor="imgUpload" className="bg-blue-700 p-2 rounded-md hover:cursor-pointer hover:bg-blue-600">Chose your file</label>

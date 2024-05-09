@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gallery.cat",
+  title: "Cat.jpg",
   description: "Gallery for cat photos",
 };
 
@@ -22,12 +22,6 @@ async function TopNav() {
       <p>Cat.jpg</p>
       {profile ? 
       <div className="bg-cover bg-center w-8 h-8 rounded-full" style={{backgroundImage: `url(${profile[0].avatar_url})`}}/>
-      // <Image
-      // width={50}
-      // height={50}
-      // src={profile[0].avatar_url}
-      // alt="user profile picture"
-      // /> 
       : 
       <p>Log In</p> }
     </nav>
@@ -35,18 +29,19 @@ async function TopNav() {
 }
 
 export default async function RootLayout({
-  children,
-}: Readonly<{
+  children, modal
+}:{
   children: React.ReactNode;
-}>) {
-
-  
+  modal: React.ReactNode;
+}) {
   return (
     <html lang="en">
       
       <body className={inter.className}>
         <TopNav/>
         {children}
+        {modal}
+        <div id="modal-root"/>
       </body>
     </html>
   );
