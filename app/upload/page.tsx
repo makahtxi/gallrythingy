@@ -72,17 +72,20 @@ export default function Page(){
         setURL(imageURL)
     }
 
+   async function signOut(){
+        console.log("Sign Out")
+        await supabase.auth.signOut()
+    }
     return(
         <div className="flex justify-around items-center w-full h-screen">
             <div className="flex flex-col h-96 w-2/12 items-center justify-between bg-gray-900 p-4 border border-white rounded-md">
-            <h1> Accont Information</h1>
-            <p>{user}</p>
-            <label htmlFor="imgUpload" className="bg-blue-700 p-2 rounded-md hover:cursor-pointer hover:bg-blue-600">Chose your file</label>
-            <input id="imgUpload" name="img" className="w-0 h-0 opacity-0 overflow-hidden absolute -z-10" type="file" accept="image/*" onChange={uploadImage}/>
+                <h1> Account Information</h1>
+                <p>{user}</p>
+                <a onClick={signOut} className="bg-blue-700 p-2 rounded-md hover:cursor-pointer hover:bg-blue-600"> Signout </a>
             </div>
             <div className="flex flex-col h-96 w-2/12 items-center justify-between bg-gray-900 p-4 border border-white rounded-md">
-            <h1> Share your picture here</h1>
-            <div className="w-60 aspect-square rounded-sm bg-gray-700 bg-cover  border border-white" style={{backgroundImage: avatar ? `url(${avatar})`: 'none'}}>
+                <h1> Share your picture here</h1>
+            <div className="w-10/12 aspect-square rounded-sm bg-gray-700 bg-cover  border border-white" style={{backgroundImage: avatar ? `url(${avatar})`: 'none'}}>
                 
             </div>
             <label htmlFor="imgUpload" className="bg-blue-700 p-2 rounded-md hover:cursor-pointer hover:bg-blue-600">Chose your file</label>

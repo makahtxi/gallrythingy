@@ -20,14 +20,14 @@ export default async function Home() {
 
   const imageList = images ?? []
   return (
-    <div>
-    <div className="flex flex-wrap gap-4">
+    <div className="w-10/12 m-auto flex flex-col justify-center">
+    <div className="flex w-full flex-wrap gap-4">
       {imageList.map((image) =>{
         return (
           
-          <div key={image.id} className="flex justify-center items-center w-48 h-48 bg-black">
+          <div key={image.id} className="flex justify-center items-center w-5/12 bg-black">
             <Link href={`/photos/${image.id}`} passHref>
-            <img src={image.avatar_url} className="max-w-48 max-h-48"/>
+            <img src={image.avatar_url} className=""/>
             </Link>
           </div>
           

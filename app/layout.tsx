@@ -16,13 +16,14 @@ async function TopNav() {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   const {data: profile} = await supabase.from("profiles").select().eq("id", user?.id)
-  
+
+
   return(
     <nav className="w-full flex items-center justify-between p-4 bg-pink-400 mb-4">
       <p>Cat.jpg</p>
-      {profile ? 
+      {profile  ?
       <div className="bg-cover bg-center w-8 h-8 rounded-full" style={{backgroundImage: `url(${profile[0].avatar_url})`}}/>
-      : 
+      :
       <p>Log In</p> }
     </nav>
   )
