@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { createClient } from "@/utils/supabase/server";
-import Image from "next/image";
-import { redirect } from "next/navigation";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
