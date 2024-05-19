@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { createClient } from "@/utils/supabase/client"
 import { redirect } from "next/navigation"
 
@@ -11,7 +11,7 @@ export default function Page(){
     const [avatar, setURL] = useState<string> ("")
     const [user, setUser] = useState("")
 
-    async function getUser(){
+    const getUser = useCallback(async () => {
         const { data: { user } } = await supabase.auth.getUser()
         if(!user) return
         const {data: userProfile}  = await supabase.from("profiles").select().eq("id", user?.id)
@@ -26,13 +26,13 @@ export default function Page(){
         setURL(avatarURL)
         setUser(username)
         return
-    }
+    }, [supabase])
 
-    useEffect(() => {
+    useEffect(()=>{
         (async () => {
             await getUser()
-        })();
-    }, [])
+        }) ()
+    }, [getUser]);
 
     const uploadImage: React.ChangeEventHandler<HTMLInputElement> = async(event) => {
         const { data: { user } } = await supabase.auth.getUser()
