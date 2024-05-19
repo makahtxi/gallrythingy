@@ -28,9 +28,11 @@ export default function Page(){
         return
     }
 
-    useEffect(()=>{
-        getUser();
-    }, []);
+    useEffect(() => {
+        (async () => {
+            await getUser()
+        })();
+    }, [])
 
     const uploadImage: React.ChangeEventHandler<HTMLInputElement> = async(event) => {
         const { data: { user } } = await supabase.auth.getUser()

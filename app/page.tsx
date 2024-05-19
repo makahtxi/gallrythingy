@@ -35,7 +35,7 @@ export default async function Home() {
       })}
     </div>
     <div className="flex w-full justify-center mt-6">
-      <Link href="/upload">
+      <Link href={"/upload"}>
       <p className="bg-blue-700 p-4 rounded-md">Change ur cat</p>
       </Link>
     </div>
